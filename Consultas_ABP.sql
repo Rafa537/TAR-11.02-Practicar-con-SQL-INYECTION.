@@ -15,7 +15,7 @@ WHERE TABLE_NAME = 'usuario'
   AND TABLE_SCHEMA = 'asociacionde' 
 ORDER BY ORDINAL_POSITION;
 
--- Consulta 3: Obtener información sobre claves primarias y foráneas
+-- Consulta 3: Obtener información sobre claves PK Y FK
 SELECT TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME, 
        REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME 
 FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
@@ -38,12 +38,12 @@ VALUES ('prueba', 'test@test.com', 'password123', 'U', NOW(), 0);
 
 -- 3. Función vulnerable de validación de usuario
 
--- Código PHP vulnerable del archivo modLogin.php
+-- Código PHP del archivo modLogin.php
 SELECT * FROM usuario 
 WHERE correo = '$correo' 
   AND contrasenia = '$pwd';
   
--- Código PHP vulnerable para actualizar visitas
+-- Código PHP para actualizar visitas
 UPDATE usuario 
 SET visitas = visitas + 1 
 WHERE idUsuario = $idUsuario;
@@ -61,4 +61,5 @@ WHERE correo = ''
 UNION 
 SELECT idUsuario, nombre, contrasenia, permiso, correo, fecha_registro, visitas 
 FROM usuario 
+
 -- ' AND contrasenia = 'test'
